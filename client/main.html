@@ -1,0 +1,11 @@
+<body ng-app="toDoList" ng-strict-di="">
+  <div ng-controller="MainCtrl as vm">
+    var1={{var1}}
+    <br/>
+    <ul>
+      <li ng-repeat="task in vm.tasks">
+        <p>{{task.name}}</p>
+      </li>
+    </ul>
+  </div>
+</body>
