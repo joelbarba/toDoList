@@ -1,11 +1,97 @@
 <body ng-app="toDoList" ng-strict-di="">
-  <div ng-controller="MainCtrl as vm">
-    var1={{var1}}
-    <br/>
-    <ul>
-      <li ng-repeat="task in vm.tasks">
-        <p>{{task.name}}</p>
-      </li>
-    </ul>
+  <div ng-controller="MainCtrl as vm" class="container">
+detMode={{detMode}}
+    <!-- Left column (list) -->
+    <div ng-class="detMode === 'show' ? 'col-xs-6' : 'col-xs-6'">
+
+      <!-- Details title -->
+      <div class="row">
+        <div class="col-xs-8">
+          <h3>List:</h3>
+          <hr>
+        </div>
+        <div class="col-xs-4 text-right">
+          <h3> <button class="btn btn-success" ng-click="itemHandler.showAddPanel()">Add</button> </h3>
+        </div>
+      </div>
+
+      <div class="row">
+        <ul class="list-unstyled table-list">
+          <!-- List caption -->
+          <li class="darkBg">
+            <div class="row">
+              <div class="col-xs-9"> <h4> <span>Task name</span> </h4> </div>
+              <div class="col-xs-3"> <h4> <span>Status</span> </h4> </div>
+            </div>
+          </li>
+
+          <!-- List content -->
+          <li ng-repeat="task in vm.tasks">
+            <div class="row">
+              <div class="col-xs-7"> <h4> <span>{{task.name}}</span> </h4> </div>
+              <div class="col-xs-3"> <h4> <span>{{task.done}}</span> </h4> </div>
+              <div class="col-xs-2"> 
+                <h5>
+                  <span class="mobile-list-btn" ng-click="itemHandler.showEditPanel(task)">
+                    <span class="glyphicon glyphicon-chevron-right"></span> 
+                  </span> 
+                </h5>
+              </div>
+            </div>
+          </li>
+
+        </ul>
+      </div>
+
+    </div>
+    
+    <!-- Right column (details) -->
+    <div class="col-xs-6" ng-show="detMode == 'add' || detMode == 'edit'">
+      
+      <!-- Details title -->
+      <div class="row">
+        <div class="col-xs-12">
+          <h3>Details:</h3>
+          <hr>
+        </div>
+      </div>
+
+      <div class="row">
+        <form class="form-horizontal">
+          <div class="form-group">
+            <label for="inputTaskName" class="col-sm-4 control-label">Task name:</label>
+            <div class="col-sm-8">
+              <input type="text" class="form-control" ng-model="itemHandler.task.name" id="inputTaskName" placeholder="Name of the task">
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="inputTaskDesc" class="col-sm-4 control-label">Description:</label>
+            <div class="col-sm-8">
+              <input type="text" class="form-control" ng-model="itemHandler.task.description" id="inputPassword3" placeholder="Password">
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="inputTaskStatus" class="col-sm-4 control-label">Status:</label>
+            <div class="col-sm-8">
+              <div class="checkbox">
+                <label>
+                  <input id="inputTaskStatus" ng-model="itemHandler.task.done" type="checkbox">
+                </label>
+              </div>
+            </div>
+          </div>
+          <div class="form-group text-right">
+            <div class="col-sm-12">
+              <button ng-show="detMode == 'edit'" class="btn btn-danger"  ng-click="itemHandler.remove()" confirm>Delete</button>
+              <button ng-show="detMode == 'edit' || detMode == 'add'" class="btn btn-primary" ng-click="itemHandler.cancel()">Cancel</button>
+              <button ng-show="detMode == 'edit'" class="btn btn-success" ng-click="itemHandler.update()">Save</button>
+              <button ng-show="detMode == 'add'"  class="btn btn-success" ng-click="itemHandler.add()">Add</button>
+            </div>
+          </div>
+        </form>
+      </div>
+
+    </div>
+
   </div>
 </body>

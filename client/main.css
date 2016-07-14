@@ -1,1 +1,20 @@
 /* CSS declarations go here */
+
+.darkBg {
+	background-color: #117788;
+	color: #DDDDDD;
+	padding: 5px;
+}
+
+
+.mobile-list-btn {
+  color: #FFFFFF;
+  margin-top: 4px;
+  cursor: pointer;
+  padding: 5px 7px;
+  font-weight: 300;
+  background: #3388AA;
+  -webkit-border-radius: 5px;
+  -moz-border-radius: 5px;
+  border-radius: 5px;
+}
